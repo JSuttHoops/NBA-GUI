@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NBA Stats Web</title>
+<style>
+body { font-family: Arial, sans-serif; padding: 1em; }
+.hidden { display: none; }
+button { margin-right: 0.5em; }
+table { border-collapse: collapse; margin-top: 1em; }
+th, td { border: 1px solid #ccc; padding: 2px 4px; }
+</style>
+</head>
+<body>
+<h1>NBA Stats Web</h1>
+<div>
+<button id="tab-player">Player Stats</button>
+<button id="tab-team">Team Stats</button>
+<button id="tab-visual">Visualize</button>
+</div>
+<div id="player" class="tab">
+<div>
+<input id="player-id" placeholder="Player ID">
+<button id="player-run">Run</button>
+</div>
+<div>
+<input id="filter" placeholder="Filter rows">
+<button id="player-chart">Chart</button>
+</div>
+<table id="player-table"></table>
+</div>
+<div id="team" class="tab hidden">
+<div>
+<input id="team-id" placeholder="Team ID">
+<button id="team-run">Run</button>
+</div>
+<div>
+<input id="filter-team" placeholder="Filter rows">
+<button id="team-chart">Chart</button>
+</div>
+<table id="team-table"></table>
+</div>
+<div id="visual" class="tab hidden">
+<select id="chart-type">
+<option value="line">Line</option>
+<option value="scatter">Scatter</option>
+</select>
+<button id="chart-refresh">Refresh</button>
+<div><img id="chart-img" alt="chart"></div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-# NBA Desktop Help
+# NBA Stats Web Help
 
 Welcome! This guide explains how to fetch and visualize NBA statistics.
 
@@ -24,12 +24,5 @@ run\run.bat
 ```
 
 This command downloads updates, installs all requirements and starts the
-backend and frontend servers. Leave the terminal open while using the app.
-
-If you want to run the frontend alone, install its dependencies first:
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
+local Flask server. Your default browser will open automatically. Leave
+the terminal open while using the app.
