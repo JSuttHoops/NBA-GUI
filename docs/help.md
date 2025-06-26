@@ -15,7 +15,12 @@ For more details visit the official [nba_api project](https://github.com/swar/nb
 From the project root simply execute:
 
 ```bash
-./run/run.sh
+./run/run.sh       # macOS/Linux
+```
+On Windows use:
+
+```cmd
+run\run.bat
 ```
 
 This command downloads updates, installs all requirements and starts the
