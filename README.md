@@ -24,7 +24,12 @@ Open `docs/help.md` for detailed instructions.
    repository and launch the application:
 
    ```bash
-   ./run/run.sh
+   ./run/run.sh       # macOS/Linux
+   ```
+   On Windows use:
+
+   ```cmd
+   run\run.bat
    ```
 
 The script creates a Python virtual environment under `backend/venv`, installs
@@ -34,5 +39,6 @@ changes from the Git repository before launching.
 
 ## Updating
 
-Running `./run/run.sh` again will pull the newest changes from the remote Git
-repository and restart the app. This provides an easy way to stay up to date.
+Running `./run/run.sh` (or `run\run.bat` on Windows) again will pull the newest
+changes from the remote Git repository and restart the app. This provides an
+easy way to stay up to date.
