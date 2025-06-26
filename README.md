@@ -20,6 +20,14 @@ Open `docs/help.md` for detailed instructions.
    cd NBA-GUI
    ```
 
+   If you prefer running the frontend manually, install its Node
+   dependencies first:
+
+   ```bash
+   cd frontend
+   npm install
+   ```
+
 2. Run the helper script which will install all dependencies, update the
    repository and launch the application:
 
