@@ -1,0 +1,8 @@
+Flask==2.3.2
+pandas
+nba_api
+matplotlib
+seaborn
+plotly
+joblib
+pyyaml

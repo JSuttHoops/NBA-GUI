@@ -1,0 +1,8 @@
+appId: com.example.nba
+productName: NBA Desktop App
+files:
+  - frontend/dist/**/*
+  - backend/app/**
+extraFiles:
+  - from: backend/endpoints.yaml
+    to: .

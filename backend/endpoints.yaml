@@ -1,0 +1,22 @@
+# Player-centric
+PlayerGameLog
+PlayerDashboardByYearOverYear
+PlayerCareerStats
+ShotChartDetail
+CommonPlayerInfo
+
+# Team-centric
+TeamGameLog
+TeamDashboardByYearOverYear
+TeamDetails
+
+# Box scores
+BoxScoreTraditionalV2
+BoxScoreAdvancedV2
+BoxScoreFourFactorsV2
+
+# Play-by-play & finders
+PlayByPlayV2
+LeagueGameFinder
+LeagueDashLineups
+LeagueDashPlayerStats
