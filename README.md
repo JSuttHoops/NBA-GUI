@@ -7,6 +7,8 @@ This project provides a lightweight web application for exploring NBA statistics
 - Interactive data grid with plain‑English labels
 - Built‑in charting: line, bar, heatmap and more
 - Export results to CSV, Excel, JSON or Parquet
+- Search players and teams by name with instant suggestions
+- Filter results using dates and a quick text search
 
 Open `docs/help.md` for detailed instructions.
 
