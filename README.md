@@ -1,13 +1,12 @@
-# NBA Desktop App
+# NBA Stats Web Interface
 
-This project offers a user-friendly desktop application for exploring NBA statistics. It bundles a small Flask server with an Electron + React interface. Everything runs locally on your computer.
+This project provides a lightweight web application for exploring NBA statistics. A Flask backend serves a small webpage that runs entirely in your browser.
 
 ## Features
 - Fetch common stats like player logs and box scores
 - Interactive data grid with plain‑English labels
 - Built‑in charting: line, bar, heatmap and more
 - Export results to CSV, Excel, JSON or Parquet
-- Cross‑platform installers (MSI and DMG/PKG)
 
 Open `docs/help.md` for detailed instructions.
 
@@ -18,14 +17,6 @@ Open `docs/help.md` for detailed instructions.
    ```bash
    git clone <repository-url>
    cd NBA-GUI
-   ```
-
-   If you prefer running the frontend manually, install its Node
-   dependencies first:
-
-   ```bash
-   cd frontend
-   npm install
    ```
 
 2. Run the helper script which will install all dependencies, update the
@@ -40,10 +31,10 @@ Open `docs/help.md` for detailed instructions.
    run\run.bat
    ```
 
-The script creates a Python virtual environment under `backend/venv`, installs
-required Python packages as well as Node dependencies for the frontend and then
-starts both servers. On subsequent runs it will automatically fetch the latest
-changes from the Git repository before launching.
+   The script creates a Python virtual environment under `backend/venv`, installs
+the required packages and then starts the local server. Your default browser
+opens automatically. On subsequent runs it will pull the latest changes before
+launching.
 
 ## Updating
 

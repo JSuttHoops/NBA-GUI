@@ -18,8 +18,9 @@ logging.basicConfig(
     format='%(levelname)s %(asctime)s %(message)s'
 )
 
-app = Flask(__name__)
-CORS(app, origins="http://localhost:*")
+STATIC_DIR = Path(__file__).resolve().parent.parent / 'web'
+app = Flask(__name__, static_folder=str(STATIC_DIR), static_url_path='')
+CORS(app)
 
 ENDPOINTS = []
 ENDPOINT_FILE = Path(__file__).with_name('endpoints.yaml')
@@ -31,6 +32,10 @@ if ENDPOINT_FILE.exists():
                 ENDPOINTS.append(line)
 
 CACHE = {}
+
+@app.get('/')
+def index():
+    return app.send_static_file('index.html')
 
 @lru_cache(maxsize=1)
 def endpoints_module():

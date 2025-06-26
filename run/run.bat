@@ -1,9 +1,9 @@
 @echo off
 setlocal
 
-rem Helper script to run the NBA Desktop app on Windows.
+rem Helper script to run the NBA stats web interface on Windows.
 rem It updates the repository, installs dependencies and starts
-rem both the backend and frontend servers.
+rem the local Flask server.
 
 set ROOT=%~dp0..
 cd /d %ROOT%
@@ -21,20 +21,9 @@ if not exist venv (
 echo Installing Python dependencies...
 venv\Scripts\pip install -r requirements.txt
 
-rem ----- Frontend setup -----
-cd ..\frontend
-if not exist node_modules (
-    echo Installing Node dependencies...
-    npm install
-)
-
-rem ----- Start servers -----
-cd ..\backend
-start "NBA Backend" venv\Scripts\python app.py --port 5005
-cd ..\frontend
-start "NBA Frontend" npm run dev
-
+cd ..
+call backend\venv\Scripts\python nba_gui.py run
 echo.
-echo Servers started. Close this window to stop them.
+echo Application started. Close this window to stop it.
 pause
 endlocal
