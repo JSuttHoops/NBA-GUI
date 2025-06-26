@@ -25,3 +25,11 @@ run\run.bat
 
 This command downloads updates, installs all requirements and starts the
 backend and frontend servers. Leave the terminal open while using the app.
+
+If you want to run the frontend alone, install its dependencies first:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
