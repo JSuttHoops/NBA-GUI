@@ -7,6 +7,12 @@ export default function App() {
   const [tab, setTab] = useState<'player' | 'team' | 'visualize'>('player')
   const [playerId, setPlayerId] = useState('')
   const [teamId, setTeamId] = useState('')
+  const [playerName, setPlayerName] = useState('')
+  const [teamName, setTeamName] = useState('')
+  const [playerResults, setPlayerResults] = useState<any[]>([])
+  const [teamResults, setTeamResults] = useState<any[]>([])
+  const [startDate, setStartDate] = useState('')
+  const [endDate, setEndDate] = useState('')
   const [playerData, setPlayerData] = useState<Row[]>([])
   const [teamData, setTeamData] = useState<Row[]>([])
   const [filter, setFilter] = useState('')
@@ -27,6 +33,20 @@ export default function App() {
     set(json.data as Row[])
   }
 
+  async function searchPlayer() {
+    if (!playerName) return
+    const resp = await fetch(`http://localhost:${port}/search/player/${encodeURIComponent(playerName)}`)
+    const json = await resp.json()
+    setPlayerResults(json)
+  }
+
+  async function searchTeam() {
+    if (!teamName) return
+    const resp = await fetch(`http://localhost:${port}/search/team/${encodeURIComponent(teamName)}`)
+    const json = await resp.json()
+    setTeamResults(json)
+  }
+
   async function visualize(data: Row[]) {
     const resp = await fetch(`http://localhost:${port}/visualize`, {
       method: 'POST',
@@ -38,10 +58,25 @@ export default function App() {
     setTab('visualize')
   }
 
-  const shownPlayer = playerData.filter(r =>
-    JSON.stringify(r).toLowerCase().includes(filter.toLowerCase()))
-  const shownTeam = teamData.filter(r =>
-    JSON.stringify(r).toLowerCase().includes(filter.toLowerCase()))
+  function dateInRange(d: string) {
+    if (!d) return true
+    const val = new Date(d)
+    if (startDate && val < new Date(startDate)) return false
+    if (endDate && val > new Date(endDate)) return false
+    return true
+  }
+
+  const shownPlayer = playerData.filter(r => {
+    const txtOk = JSON.stringify(r).toLowerCase().includes(filter.toLowerCase())
+    const dateOk = dateInRange(r.GAME_DATE)
+    return txtOk && dateOk
+  })
+
+  const shownTeam = teamData.filter(r => {
+    const txtOk = JSON.stringify(r).toLowerCase().includes(filter.toLowerCase())
+    const dateOk = dateInRange(r.GAME_DATE)
+    return txtOk && dateOk
+  })
 
   return (
     <div className="p-4">
@@ -56,6 +91,13 @@ export default function App() {
         <div>
           <div className="mb-2">
             <input
+              value={playerName}
+              onChange={e => setPlayerName(e.target.value)}
+              className="border p-1 mr-2"
+              placeholder="Player name"
+            />
+            <button onClick={searchPlayer} className="px-2 py-1 border mr-2">Search</button>
+            <input
               value={playerId}
               onChange={e => setPlayerId(e.target.value)}
               className="border p-1 mr-2"
@@ -65,6 +107,17 @@ export default function App() {
               onClick={() => runQuery('PlayerGameLog', { PlayerID: playerId }, setPlayerData)}
               className="px-2 py-1 border"
             >Run</button>
+            {playerResults.length > 0 && (
+              <div className="mt-2 border bg-white shadow absolute z-10">
+                {playerResults.map(p => (
+                  <button
+                    key={p.id}
+                    onClick={() => { setPlayerId(String(p.id)); setPlayerName(p.full_name); setPlayerResults([]) }}
+                    className="block text-left w-full px-2 py-1 hover:bg-gray-100"
+                  >{p.full_name}</button>
+                ))}
+              </div>
+            )}
           </div>
           <div className="mb-2">
             <input
@@ -77,6 +130,18 @@ export default function App() {
               className="ml-2 px-2 py-1 border"
               onClick={() => visualize(shownPlayer)}
             >Chart</button>
+            <input
+              type="date"
+              value={startDate}
+              onChange={e => setStartDate(e.target.value)}
+              className="ml-2 border p-1"
+            />
+            <input
+              type="date"
+              value={endDate}
+              onChange={e => setEndDate(e.target.value)}
+              className="ml-2 border p-1"
+            />
           </div>
           <table className="text-sm">
             <thead>
@@ -99,6 +164,13 @@ export default function App() {
         <div>
           <div className="mb-2">
             <input
+              value={teamName}
+              onChange={e => setTeamName(e.target.value)}
+              className="border p-1 mr-2"
+              placeholder="Team name"
+            />
+            <button onClick={searchTeam} className="px-2 py-1 border mr-2">Search</button>
+            <input
               value={teamId}
               onChange={e => setTeamId(e.target.value)}
               className="border p-1 mr-2"
@@ -108,6 +180,17 @@ export default function App() {
               onClick={() => runQuery('TeamGameLog', { TeamID: teamId }, setTeamData)}
               className="px-2 py-1 border"
             >Run</button>
+            {teamResults.length > 0 && (
+              <div className="mt-2 border bg-white shadow absolute z-10">
+                {teamResults.map(t => (
+                  <button
+                    key={t.id}
+                    onClick={() => { setTeamId(String(t.id)); setTeamName(t.full_name); setTeamResults([]) }}
+                    className="block text-left w-full px-2 py-1 hover:bg-gray-100"
+                  >{t.full_name}</button>
+                ))}
+              </div>
+            )}
           </div>
           <div className="mb-2">
             <input
@@ -120,6 +203,18 @@ export default function App() {
               className="ml-2 px-2 py-1 border"
               onClick={() => visualize(shownTeam)}
             >Chart</button>
+            <input
+              type="date"
+              value={startDate}
+              onChange={e => setStartDate(e.target.value)}
+              className="ml-2 border p-1"
+            />
+            <input
+              type="date"
+              value={endDate}
+              onChange={e => setEndDate(e.target.value)}
+              className="ml-2 border p-1"
+            />
           </div>
           <table className="text-sm">
             <thead>

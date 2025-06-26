@@ -9,6 +9,7 @@ from pathlib import Path
 import pandas as pd
 from flask import Flask, request, jsonify, send_file, abort
 from flask_cors import CORS
+from nba_api.stats.static import players, teams
 
 LOG_DIR = Path.home() / '.nba_desktop_app' / 'logs'
 LOG_DIR.mkdir(parents=True, exist_ok=True)
@@ -112,6 +113,20 @@ def download(token):
     else:
         abort(400, description='Unknown format')
     return send_file(tmp_path, as_attachment=True)
+
+
+@app.get('/search/player/<name>')
+def search_player(name: str):
+    """Return basic player info for a name search."""
+    matches = players.find_players_by_full_name(name)
+    return jsonify(matches)
+
+
+@app.get('/search/team/<name>')
+def search_team(name: str):
+    """Return basic team info for a name search."""
+    matches = teams.find_teams_by_full_name(name)
+    return jsonify(matches)
 
 
 def main():
